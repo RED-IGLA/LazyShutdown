@@ -1,3 +1,4 @@
+import ctypes
 import sys
 
 from PySide6.QtWidgets import QApplication
@@ -14,6 +15,13 @@ if __name__ == '__main__':
     # Setting new(main) window
     window = HomePage()
     window.show() # Showing this window (what a dumb writing this comm)
+
+    # Trying to set window icon
+    try:
+        appid = 'RED-IGLA.LazyShutdown'
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(appid)
+    except AttributeError:
+        pass
 
     # Endless app cycle
     sys.exit(app.exec())

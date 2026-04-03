@@ -1,5 +1,6 @@
 import sys
 
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QMainWindow, QPushButton, QWidget, QLineEdit, QHBoxLayout, QVBoxLayout, QMessageBox, \
     QComboBox, QLabel
 from PySide6.QtCore import Qt
@@ -19,6 +20,7 @@ class HomePage(QMainWindow):
         super().__init__()
 
         self.setWindowTitle(f"LazyShutdown {get_version(short=True)}")
+        self.setWindowIcon(QIcon("assets/icon.ico"))
         self.setMinimumSize(480, 0)
         self.setFixedHeight(130)
 
