@@ -19,12 +19,12 @@ class HomePage(QMainWindow):
         super().__init__()
 
         self.setWindowTitle(f"LazyShutdown {get_version(short=True)}")
-        self.setMinimumSize(400, 0)
+        self.setMinimumSize(480, 0)
         self.setFixedHeight(130)
 
         # Input value
         self.input_field = QLineEdit()
-        self.input_field.setPlaceholderText("Enter a time to shut down")
+        self.input_field.setPlaceholderText("Enter a time to shut down (ex. 1800, 1.5 for hours)")
 
         # Time type combo box
         self.time_type_cb = QComboBox()
