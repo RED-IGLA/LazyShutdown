@@ -28,4 +28,8 @@
 ### 💎 Note
 You can clear all active timers by clicking the "Clear timer" button.
 
-## 🎉 Enjoy !
+## 📄 License
+
+This project is distributed under the **MIT** license. Details are in the file [LICENSE](LICENSE).
+
+# 🎉 Enjoy !
