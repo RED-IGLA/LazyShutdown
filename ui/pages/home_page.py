@@ -6,6 +6,7 @@ from PySide6.QtWidgets import QMainWindow, QPushButton, QWidget, QLineEdit, QHBo
 from PySide6.QtCore import Qt
 import subprocess
 
+from core.utils import resource_path
 from core.version import get_version
 
 time_type_enum = {
@@ -20,7 +21,7 @@ class HomePage(QMainWindow):
         super().__init__()
 
         self.setWindowTitle(f"LazyShutdown {get_version(short=True)}")
-        self.setWindowIcon(QIcon("assets/icon.ico"))
+        self.setWindowIcon(QIcon(resource_path("assets/icon.ico")))
         self.setMinimumSize(480, 0)
         self.setFixedHeight(130)
 
