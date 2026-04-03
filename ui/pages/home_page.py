@@ -64,7 +64,7 @@ class HomePage(QMainWindow):
 
     """
     Set timer function
-    All this bullshit is needed for float value type, ex. 1.5 hours.
+    All this bullshit is needed for float value type, ex. 1.5 hours
     Yeah we can use QSpinBox, but he did not support so necessary to us float.
     """
     def on_set_timer_button(self):
