@@ -16,13 +16,18 @@ time_type_enum = {
     3: 86400
 }
 
+action_type_enum = {
+    0: "/s",
+    1: "/r"
+}
+
 class HomePage(QMainWindow):
     def __init__(self):
         super().__init__()
 
         self.setWindowTitle(f"LazyShutdown {get_version(short=True)}")
         self.setWindowIcon(QIcon(resource_path("assets/icon.ico")))
-        self.setMinimumSize(480, 0)
+        self.setMinimumSize(570, 0)
         self.setFixedHeight(130)
 
         # Input value
@@ -32,6 +37,9 @@ class HomePage(QMainWindow):
         # Time type combo box
         self.time_type_cb = QComboBox()
         self.time_type_cb.addItems(["Seconds", "Minutes", "Hours", "Days"])
+
+        self.action_type_cb = QComboBox()
+        self.action_type_cb.addItems(["Shutdown", "Restart"])
 
         # Set timer button
         self.set_timer_button = QPushButton("Set timer")
@@ -51,6 +59,7 @@ class HomePage(QMainWindow):
         text_input_layout = QHBoxLayout()
         text_input_layout.addWidget(self.input_field)
         text_input_layout.addWidget(self.time_type_cb)
+        text_input_layout.addWidget(self.action_type_cb)
         text_input_layout.addWidget(self.set_timer_button, alignment=Qt.AlignmentFlag.AlignLeft)
 
         # Main layout (vertical)
@@ -73,6 +82,7 @@ class HomePage(QMainWindow):
     def on_set_timer_button(self):
         raw_value = self.input_field.text()
         time_type = self.time_type_cb.currentIndex()
+        action_type = self.action_type_cb.currentIndex()
 
         print(f"Trying set timer to: [{raw_value}]")
         print("Trying get type...")
@@ -100,15 +110,13 @@ class HomePage(QMainWindow):
         total_seconds = int(input_value * time_type_enum[time_type])
         print(f"Total seconds: {total_seconds}")
 
-        result = subprocess.run(["shutdown", "/s", "/t", str(total_seconds)],
+        result = subprocess.run(["shutdown", action_type_enum[action_type], "/t", str(total_seconds)],
                                 stderr=subprocess.DEVNULL,
                                 stdout=subprocess.DEVNULL,
                                 creationflags=subprocess.CREATE_NO_WINDOW)
         result_return_code = result.returncode
         match result_return_code:
             case 0:
-                # QMessageBox.information(self, "Timer is set", "Timer successfully set!\n"
-                #                         f"Total seconds: {total_seconds}")
                 msg = QMessageBox(self)
                 msg.setIcon(QMessageBox.Icon.Information)
                 msg.setWindowTitle("Timer set")

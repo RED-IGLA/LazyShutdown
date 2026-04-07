@@ -19,8 +19,12 @@ if __name__ == '__main__':
     # Trying to set window icon
     try:
         appid = 'RED-IGLA.LazyShutdown'
-        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(appid)
-    except AttributeError:
+        shell32 = ctypes.windll.shell32
+        set_id_func = getattr(shell32, 'SetCurrentProcessExplicitAppUserModelID', None)
+
+        if set_id_func:
+            set_id_func(appid)
+    except (OSError, AttributeError):
         pass
 
     # Endless app cycle
